@@ -328,7 +328,7 @@ int BIO_listen(int sock, const BIO_ADDR *addr, int options)
     }
 
   /* On OpenBSD it is always IPv6 only with IPv6 sockets thus read-only */
-# if defined(IPV6_V6ONLY) && !defined(__OpenBSD__)
+# if defined(IPV6_V6ONLY) && !defined(__OpenBSD__) && !defined(__HAIKU__)
     if (BIO_ADDR_family(addr) == AF_INET6) {
         /*
          * Note: Windows default of IPV6_V6ONLY is ON, and Linux is OFF.
