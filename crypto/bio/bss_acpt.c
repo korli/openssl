@@ -94,7 +94,13 @@ static BIO_ACCEPT *BIO_ACCEPT_new(void)
 
     if ((ret = OPENSSL_zalloc(sizeof(*ret))) == NULL)
         return NULL;
+
+#ifdef __HAIKU__
+    ret->accept_family = BIO_FAMILY_IPV4;
+#else
     ret->accept_family = BIO_FAMILY_IPANY;
+#endif
+
     ret->accept_sock = (int)INVALID_SOCKET;
     return ret;
 }
