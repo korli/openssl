@@ -21,6 +21,12 @@
 #endif
 
 #ifndef OPENSSL_NO_DEPRECATED_3_0
+#ifdef __HAIKU__
+static int test_print_error_format(void)
+{
+    return TEST_skip("not supported on Haiku");
+}
+#else
 # define IS_HEX(ch) ((ch >= '0' && ch <='9') || (ch >= 'A' && ch <='F'))
 
 static int test_print_error_format(void)
@@ -111,6 +117,7 @@ err:
     BIO_free(bio);
     return ret;
 }
+#endif
 #endif
 
 /* Test that querying the error queue preserves the OS error. */
