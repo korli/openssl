@@ -46,6 +46,7 @@ my %shared_info;
             shared_defflags     => '-Wl,--version-script=',
         };
     },
+    'haiku-shared' => sub { return $shared_info{'linux-shared'}; },
     'darwin-shared' => {
         module_ldflags        => '-bundle',
         shared_ldflag         => '-dynamiclib -current_version $(SHLIB_VERSION_NUMBER) -compatibility_version $(SHLIB_VERSION_NUMBER)',
