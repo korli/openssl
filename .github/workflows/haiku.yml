@@ -28,10 +28,10 @@ jobs:
             ssh user@localhost "chmod 777 /tmp/; pkgman update -y cmd:perl cmd:make" &&
             if [[ `uname -m` == BePC ]]; then
               ssh user@localhost "pkgman update -y cmd:gcc_x86 cmd:as_x86 cmd:pkg_config_x86 gcc_x86_syslibs_devel devel:libz_x86" &&
-              setarch x86 bash -c "source /etc/profile && ./config zlib-dynamic shared no-asm -g && make && make test"
+              setarch x86 bash -c "source /etc/profile && ./config zlib-dynamic shared no-asm && ./configdata.pm --dump && make -s -j2 && make test HARNESS_JOBS=2"
             else
               ssh user@localhost "pkgman update -y cmd:gcc cmd:as cmd:pkg_config gcc_syslibs_devel devel:libz" &&
               source /etc/profile &&
-              ./config zlib-dynamic shared no-asm -g &&
-              make && make test
+              ./config zlib-dynamic shared no-asm && ./configdata.pm --dump &&
+              make -s -j2 && make test HARNESS_JOBS=2
             fi
