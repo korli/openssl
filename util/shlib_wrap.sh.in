@@ -97,7 +97,7 @@ NONSTOP_KERNEL)
 	DYLD_LIBRARY_PATH="${THERE}:$DYLD_LIBRARY_PATH"	# MacOS X
 	SHLIB_PATH="${THERE}:$SHLIB_PATH"		# legacy HP-UX
 	LIBPATH="${THERE}:$LIBPATH"			# AIX, OS/2
-	LIBRARY_PATH="${THERE}:$LIBRARY_PATH"		# Haiku
+	LIBRARY_PATH="${THERE}:%A/lib:/boot/system/lib"	# Haiku
 	export LD_LIBRARY_PATH DYLD_LIBRARY_PATH SHLIB_PATH LIBPATH LIBRARY_PATH
 	# Even though $PATH is adjusted [for Windows sake], it doesn't
 	# necessarily does the trick. Trouble is that with introduction
