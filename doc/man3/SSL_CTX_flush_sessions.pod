@@ -54,9 +54,13 @@ L<SSL_CTX_set_session_cache_mode(3)>,
 L<SSL_CTX_set_timeout(3)>,
 L<SSL_CTX_sess_set_get_cb(3)>
 
+=head1 HISTORY
+
+SSL_CTX_flush_sessions_ex() was added in OpenSSL 3.4.
+
 =head1 COPYRIGHT
 
-Copyright 2001-2018 The OpenSSL Project Authors. All Rights Reserved.
+Copyright 2001-2024 The OpenSSL Project Authors. All Rights Reserved.
 
 Licensed under the Apache License 2.0 (the "License").  You may not use
 this file except in compliance with the License.  You can obtain a copy

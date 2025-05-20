@@ -66,7 +66,9 @@ of the session.
 SSL_SESSION_get_time_ex() and SSL_SESSION_get_timeout() return the currently
 valid values.
 
-SSL_SESSION_set_time_ex() and SSL_SESSION_set_timeout() return 1 on success.
+SSL_SESSION_set_time_ex() returns time on success.
+
+SSL_SESSION_set_timeout() returns 1 on success.
 
 If any of the function is passed the NULL pointer for the session B<s>,
 0 is returned.
@@ -82,6 +84,11 @@ Y2038 safe.
 L<ssl(7)>,
 L<SSL_CTX_set_timeout(3)>,
 L<SSL_get_default_timeout(3)>
+
+=head1 HISTORY
+
+The functions SSL_SESSION_get_time_ex() and SSL_SESSION_set_time_ex() were
+added in OpenSSL 3.3.
 
 =head1 COPYRIGHT
 

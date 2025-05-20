@@ -151,7 +151,7 @@ static int dtls_process_record(OSSL_RECORD_LAYER *rl, DTLS_BITMAP *bitmap)
 
         if (tmpmd != NULL) {
             imac_size = EVP_MD_get_size(tmpmd);
-            if (!ossl_assert(imac_size >= 0 && imac_size <= EVP_MAX_MD_SIZE)) {
+            if (!ossl_assert(imac_size > 0 && imac_size <= EVP_MAX_MD_SIZE)) {
                 RLAYERfatal(rl, SSL_AD_INTERNAL_ERROR, ERR_R_EVP_LIB);
                 return 0;
             }
@@ -569,6 +569,12 @@ int dtls_get_more_records(OSSL_RECORD_LAYER *rl)
     if (rl->funcs->post_process_record && !rl->funcs->post_process_record(rl, rr)) {
         /* RLAYERfatal already called */
         return OSSL_RECORD_RETURN_FATAL;
+    }
+
+    if (rr->length == 0) {
+        /* No payload data in this record. Dump it */
+        rl->packet_length = 0;
+        goto again;
     }
 
     rl->num_recs = 1;
